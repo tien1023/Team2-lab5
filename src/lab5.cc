@@ -17,112 +17,128 @@ using namespace std;
 
 
 int main() {
-	
-	int		choice, sz;
-	long	data[MAXSIZE], wData[MAXSIZE];
-	double  begin_time, end_time, cpu_time_used;
-	string  ifilename, ofilename;
-	
-	while (1) {
+    int choice = 0;
+    int sz = 0;
 
-		printmenu();
-		cin >> choice;
-		
-		switch (choice) {
+    // Store large arrays outside the stack.
+    static long data[MAXSIZE], wData[MAXSIZE];
 
-			case 1: // Read input file and store data in arrays data1 and data2
-                    // The function 'readfile' returns the size of the file that was read
-					// If the file could not be read, 'readfile' returns -1
-				
-					ifilename = "lab5_input.txt";
-					sz = readfile(ifilename, data);
-			
-					if (sz < 0)	 {
-						 cerr << endl << "ERROR: Input File Not Found or File cannot be opened." <<endl;
-						 cerr << "       Please check that the file exists, its path, and try again!" << endl << endl;
-						 return 0;
-					}
-					else cout << endl << "File size is: " << sz << endl;
-			
-					break;
+    double begin_time, end_time, cpu_time_used;
+    string ifilename, ofilename;
 
-			case 2: // Sort function A
+    while (true) {
+        printmenu();
 
-                    // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
-                    
-                    
-					begin_time = clock();   // start cpu timer
-			
-					// Call your Sort function A here to sort the array 'wData''
-			        //  Note that 'wData' is of size 'sz' (see case 1).
+        if (!(cin >> choice)) {
+            cerr << "ERROR: Please enter a number." << endl;
+            return 1;
+        }
 
+        switch (choice) {
 
-			
-					end_time = clock();		// end cpu timer
+            case 1: // Load the original input data.
+                ifilename = "lab5_input.txt";
+                sz = readfile(ifilename, data);
 
-					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
-					cout << endl << "(A)Sort ran for " << cpu_time_used << " secs.";
-			
-					ofilename = "lab5_A_out.txt";
-					writefile(wData, sz, ofilename);
-					
-					if (sz < 0)	 {
-						 cerr << endl << "ERROR: Output File could not be opened." <<endl;
-						 cerr << "       Quitting Now!" << endl << endl;
-						 return 0;
-					}
-					else cout << endl << "Output written to " << ofilename << endl;
-			
-					break;
+                if (sz < 0) {
+                    cerr << "ERROR: Input file could not be opened."
+                         << endl;
+                    return 1;
+                }
 
-			case 3: // Sort function B
-			
-			        // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
-			        
-			        
-					begin_time = clock();   // start cpu timer
-			
+                cout << "File size is: " << sz << endl;
+                break;
 
-					begin_time = clock();   // start cpu timer
-			
-					// Call your Sort function B here to sort the array 'wData'
-			        //  Note that 'wDdata' is of size 'sz' (see case 1).
+            case 2: // Selection sort.
+                if (sz <= 0) {
+                    cout << "Choose option 1 to load data first."
+                         << endl;
+                    break;
+                }
 
+                // Give the sort a fresh copy of the original data.
+                for (long i = 0; i < sz; i++) {
+                    wData[i] = data[i];
+                }
 
-			
-					end_time = clock();		// end cpu timer
+                // Measure only the sorting function.
+                begin_time = clock();
 
-					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
-					cout << endl << "(B)Sort ran for " << cpu_time_used << " secs.";
-			
-					ofilename = "lab5_B_out.txt";
-					writefile(wData, sz, ofilename);
-					
-					if (sz < 0)	 {
-						 cerr << endl << "ERROR: Output File could not be opened." <<endl;
-						 cerr << "       Quitting Now!" << endl << endl;
-						 return 0;
-					}
-					else cout << endl << "Output written to " << ofilename << endl;
-			
-					break;
-					
-			// Write the other cases 4 - 7 here		
-			
-			case 0: // Exit Program
+                selectionSort(wData, sz);
 
-					cout << endl << "Received program exit command - I QUIT!" << endl << endl;
+                end_time = clock();
 
-					return 0;
+                cpu_time_used =
+                    (end_time - begin_time) / CLOCKS_PER_SEC;
 
-			default: // Error in selection
+                cout << "Selection Sort ran for "
+                     << cpu_time_used << " secs." << endl;
 
-					cout << endl << "Incorrect selection, try again from the menu below." << endl;
+                // Save the sorted array to its output file.
+                ofilename = "lab5_A_out.txt";
 
-		} // switch
+                if (writefile(wData, sz, ofilename) < 0) {
+                    cerr << "ERROR: Output file could not be opened."
+                         << endl;
+                    return 1;
+                }
 
-	} // while
-	
-	return 0;
+                cout << "Output written to "
+                     << ofilename << endl;
+                break;
+
+            // Placeholders until the remaining sorts are connected.
+            case 3:
+            case 4:
+            case 5: // Selection sort.
+    		if (sz <= 0) {
+       			cout << "Choose option 1 to load data first." << endl;
+        	break;
+    		}
+
+    		// Copy the original data into the working array.
+    		for (long i = 0; i < sz; i++) {
+        		wData[i] = data[i];
+    		}
+
+    		// Measure only the sorting function.
+    		begin_time = clock();
+
+    		selectionSort(wData, sz);
+
+    		end_time = clock();
+
+    		cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+
+    		cout << "Selection Sort ran for "
+         		<< cpu_time_used << " secs." << endl;
+
+   	 		// Menu option 5 corresponds to algorithm D.
+    		ofilename = "lab5_D_out.txt";
+
+    		if (writefile(wData, sz, ofilename) < 0) {
+        		cerr << "ERROR: Output file could not be opened." << endl;
+        		return 1;
+    		}
+
+    		cout << "Output written to " << ofilename << endl;
+    		break;
+
+            case 6:
+            case 7:
+                cout << "This sorting option is not implemented yet."
+                     << endl;
+                break;
+
+            case 0: // Exit the program.
+                cout << "Exiting program." << endl;
+                return 0;
+
+            default:
+                cout << "Incorrect selection. Please try again."
+                     << endl;
+                break;
+        }
+    }
 }
 
