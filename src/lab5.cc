@@ -49,13 +49,139 @@ int main() {
                 cout << "File size is: " << sz << endl;
                 break;
 
-            case 2: 
-            case 3:
-            case 4:
-            case 5:
-                cout << "This sorting option is not implemented yet."
-                     << endl;
+            case 2: // Bubble sort
+
+                    // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
+                    for(int i = 0; i<sz; i++){
+                    	wData[i] = data[i];
+                    }
+
+					begin_time = clock();   // start cpu timer
+
+					// Call your Sort function A here to sort the array 'wData''
+			        //  Note that 'wData' is of size 'sz' (see case 1).
+					bubbleSort(wData, sz);
+
+
+					end_time = clock();		// end cpu timer
+
+					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+					cout << endl << "BubbleSort ran for " << cpu_time_used << " secs.";
+
+                    // Menu option 2 goes to Bubble Sort
+					ofilename = "bubbleSort_out.txt";
+					writefile(wData, sz, ofilename);
+
+					if (sz < 0)	 {
+						 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+						 cerr << "       Quitting Now!" << endl << endl;
+						 return 0;
+					}
+					else cout << endl << "Output written to " << ofilename << endl;
+
+					break;
+
+			case 3: // Shell sort
+
+			        // First, copy the contents of the array 'data' to the working array 'wData'. Your program should sort 'wData' and not 'data'.
+
+				for(int i = 0; i<sz; i++){
+                    	wData[i] = data[i];
+                    }
+
+					begin_time = clock();   // start cpu timer
+
+					// Call your Sort function A here to sort the array 'wData''
+			        //  Note that 'wData' is of size 'sz' (see case 1).
+					shellSort(wData, sz);
+
+					end_time = clock();		// end cpu timer
+
+					cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+					cout << endl << "ShellSort ran for " << cpu_time_used << " secs.";
+
+
+                    // Menu option 3 goes to Shell Sort
+					ofilename = "shellSort_out.txt";
+					writefile(wData, sz, ofilename);
+
+					if (sz < 0)	 {
+						 cerr << endl << "ERROR: Output File could not be opened." <<endl;
+						 cerr << "       Quitting Now!" << endl << endl;
+						 return 0;
+					}
+					else cout << endl << "Output written to " << ofilename << endl;
+
+					break;
+
+            case 4: // Insertion sort.
+                if (sz <= 0) {
+                    cout << "Choose option 1 to load data first." << endl;
                 break;
+                }
+
+                // Copy the original data into the working array.
+                for (long i = 0; i < sz; i++) {
+                    wData[i] = data[i];
+                }
+
+                // Measure only the sorting function.
+                begin_time = clock();
+
+                insertionsort(wData, sz);
+
+                end_time = clock();
+
+                cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+
+                cout << "Insertion Sort ran for "
+                    << cpu_time_used << " secs." << endl;
+
+                // Menu option 4 goes to Insertion Sort
+                ofilename = "insertionSort_out.txt";
+
+                if (writefile(wData, sz, ofilename) < 0) {
+                    cerr << "ERROR: Output file could not be opened." << endl;
+                    return 1;
+                }
+
+                cout << "Output written to " << ofilename << endl;
+                break;
+
+            case 5: // Heap sort.
+                if (sz <= 0) {
+                    cout << "Choose option 1 to load data first." << endl;
+                break;
+                }
+
+                // Copy the original data into the working array.
+                for (long i = 0; i < sz; i++) {
+                    wData[i] = data[i];
+                }
+
+                // Measure only the sorting function.
+                begin_time = clock();
+
+                heapsort(wData, sz);
+
+                end_time = clock();
+
+                cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+
+                cout << "Heap Sort ran for "
+                    << cpu_time_used << " secs." << endl;
+
+                // // Menu option 5 goes to Heap Sort
+                ofilename = "heapSort_out.txt";
+
+                if (writefile(wData, sz, ofilename) < 0) {
+                    cerr << "ERROR: Output file could not be opened." << endl;
+                    return 1;
+                }
+
+                 cout << "Output written to " << ofilename << endl;
+                break;
+
             case 6: // Selection sort - Gilbert =)
     		    if (sz <= 0) {
        			    cout << "Choose option 1 to load data first." << endl;
@@ -79,8 +205,8 @@ int main() {
     		    cout << "Selection Sort ran for "
          		    << cpu_time_used << " secs." << endl;
 
-   	 		    // Menu option 5 corresponds to algorithm D.
-    		    ofilename = "lab5_D_out.txt";
+   	 		    // Menu option 6 goes to Selection Sort
+    		    ofilename = "selectionSort_out.txt";
 
     		    if (writefile(wData, sz, ofilename) < 0) {
         		    cerr << "ERROR: Output file could not be opened." << endl;
@@ -90,43 +216,41 @@ int main() {
     		    cout << "Output written to " << ofilename << endl;
     		    break;
 
-                case 7: // Counting sort - Gilbert =)
-                    if (sz <= 0) {
-                        cout << "Choose option 1 to load data first." << endl;
-                        break;
-                    }
-
-                     // Copy the data into the working array.
-                    for (long i = 0; i < sz; i++) {
-                        wData[i] = data[i];
-                    }            
-
-                    // Measure  the sorting function.
-                    begin_time = clock();
-
-                    countingSort(wData, sz);
-
-                    end_time = clock();
-
-                    cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
-
-                    cout << "Counting Sort ran for "
-                        << cpu_time_used << " secs." << endl;
-
-                    // Menu option 6 corresponds to algorithm E.
-                    ofilename = "lab5_E_out.txt";
-
-                    if (writefile(wData, sz, ofilename) < 0) {
-                        cerr << "ERROR: Output file could not be opened." << endl;
-                    return 1;
-                    }
-
-                    cout << "Output written to " << ofilename << endl;
+            case 7: // Counting sort - Gilbert =)
+                if (sz <= 0) {
+                    cout << "Choose option 1 to load data first." << endl;
                     break;
+                }
+
+                 // Copy the data into the working array.
+                for (long i = 0; i < sz; i++) {
+                    wData[i] = data[i];
+                }            
+
+                // Measure  the sorting function.
+                begin_time = clock();
+
+                countingSort(wData, sz);
+
+                end_time = clock();
+
+                cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+
+                cout << "Counting Sort ran for "
+                    << cpu_time_used << " secs." << endl;
+
+                // Menu option 7 goes to Counting Sort
+                ofilename = "countingSort_out.txt";
+
+                if (writefile(wData, sz, ofilename) < 0) {
+                    cerr << "ERROR: Output file could not be opened." << endl;
+                return 1;
+                }
+
+                cout << "Output written to " << ofilename << endl;
+                break;
 
 
-
-            
 
             case 0: // Exit the program.
                 cout << "Exiting program." << endl;

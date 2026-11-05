@@ -9,7 +9,7 @@ void shellSort(long data[], int sz){
 
 	// the gaps array store the gaps that we will go through.
 	//this loop helps us generate the gaps that we can divide the data array into
-	for(int h=1, i=0; h<sz; i++){
+	for(h=1, i=0; h<sz; i++){
 		gaps[i]=h;
 		h=3*h+1;
 	}
