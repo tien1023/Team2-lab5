@@ -16,3 +16,7 @@ void	swap(long& x, long& y);
 //Gilbert Added =)
 void selectionSort(long data[], long size);
 void countingSort(long data[], long size);
+
+//Tien Add
+void bubbleSort(long data[], int sz);
+void shellSort(long data[], int sz);
