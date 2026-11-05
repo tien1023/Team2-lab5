@@ -50,47 +50,13 @@ int main() {
                 break;
 
             case 2: // Selection sort.
-                if (sz <= 0) {
-                    cout << "Choose option 1 to load data first."
-                         << endl;
-                    break;
-                }
-
-                // Give the sort a fresh copy of the original data.
-                for (long i = 0; i < sz; i++) {
-                    wData[i] = data[i];
-                }
-
-                // Measure only the sorting function.
-                begin_time = clock();
-
-                selectionSort(wData, sz);
-
-                end_time = clock();
-
-                cpu_time_used =
-                    (end_time - begin_time) / CLOCKS_PER_SEC;
-
-                cout << "Selection Sort ran for "
-                     << cpu_time_used << " secs." << endl;
-
-                // Save the sorted array to its output file.
-                ofilename = "lab5_A_out.txt";
-
-                if (writefile(wData, sz, ofilename) < 0) {
-                    cerr << "ERROR: Output file could not be opened."
-                         << endl;
-                    return 1;
-                }
-
-                cout << "Output written to "
-                     << ofilename << endl;
-                break;
-
-            // Placeholders until the remaining sorts are connected.
             case 3:
             case 4:
-            case 5: // Selection sort - Gilbert =)
+            case 5:
+                cout << "This sorting option is not implemented yet."
+                     << endl;
+                break;
+            case 6: // Selection sort - Gilbert =)
     		    if (sz <= 0) {
        			    cout << "Choose option 1 to load data first." << endl;
         	    break;
@@ -124,7 +90,7 @@ int main() {
     		    cout << "Output written to " << ofilename << endl;
     		    break;
 
-                case 6: // Counting sort - Gilbert =)
+                case 7: // Counting sort - Gilbert =)
                     if (sz <= 0) {
                         cout << "Choose option 1 to load data first." << endl;
                         break;
@@ -160,10 +126,7 @@ int main() {
 
 
 
-            case 7:
-                cout << "This sorting option is not implemented yet."
-                     << endl;
-                break;
+            
 
             case 0: // Exit the program.
                 cout << "Exiting program." << endl;
