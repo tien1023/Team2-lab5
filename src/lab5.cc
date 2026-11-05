@@ -49,7 +49,7 @@ int main() {
                 cout << "File size is: " << sz << endl;
                 break;
 
-            case 2: // Selection sort.
+            case 2: 
             case 3:
             case 4:
             case 5:
