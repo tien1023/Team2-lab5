@@ -90,7 +90,7 @@ int main() {
             // Placeholders until the remaining sorts are connected.
             case 3:
             case 4:
-            case 5: // Selection sort.
+            case 5: // Selection sort - Gilbert =)
     		if (sz <= 0) {
        			cout << "Choose option 1 to load data first." << endl;
         	break;
@@ -124,7 +124,42 @@ int main() {
     		cout << "Output written to " << ofilename << endl;
     		break;
 
-            case 6:
+            case 6: // Counting sort - Gilbert =)
+                if (sz <= 0) {
+                    cout << "Choose option 1 to load data first." << endl;
+                    break;
+                }
+
+                // Copy the data into the working array.
+                for (long i = 0; i < sz; i++) {
+                wData[i] = data[i];
+                }            
+
+                // Measure  the sorting function.
+                begin_time = clock();
+
+                countingSort(wData, sz);
+
+                end_time = clock();
+
+                cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
+
+                cout << "Counting Sort ran for "
+                << cpu_time_used << " secs." << endl;
+
+                // Menu option 6 corresponds to algorithm E.
+                ofilename = "lab5_E_out.txt";
+
+                if (writefile(wData, sz, ofilename) < 0) {
+                    cerr << "ERROR: Output file could not be opened." << endl;
+                return 1;
+                }
+
+                cout << "Output written to " << ofilename << endl;
+                break;
+
+
+
             case 7:
                 cout << "This sorting option is not implemented yet."
                      << endl;

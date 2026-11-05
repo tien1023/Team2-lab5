@@ -14,4 +14,5 @@ int		writefile(long data[], long size, string outfilename);
 void	swap(long& x, long& y);
 
 //Gilbert Added =)
-void    selectionSort(long data[], long size);
+void selectionSort(long data[], long size);
+void countingSort(long data[], long size);
