@@ -36,18 +36,61 @@ int main() {
 
         switch (choice) {
 
-            case 1: // Load the original input data.
+            //For my sake this is the case statment that lets the user load file and choose between small or larger data set
+            case 1: {
+                // Needed to make adjusments here to case 1 to chosoe between smaller or large data set
+                sz = 0;
                 ifilename = "lab5_input.txt";
-                sz = readfile(ifilename, data);
 
-                if (sz < 0) {
-                    cerr << "ERROR: Input file could not be opened."
-                         << endl;
-                    return 1;
+                //loading data from file
+                int fullSize = readfile(ifilename, data);
+
+                //Checking if fiele has 2 integers
+                if (fullSize < 2) {
+                    cerr << "ERROR: Could not load at least two integers."
+                        << endl;
+                break;
                 }
 
-                cout << "File size is: " << sz << endl;
+                // Getthing the smaller dataset
+                int smallerSize = fullSize / 2;
+                // Getting the larger dataset, by multiplying smaller data set by 2, so estimates are exact
+                int largerSize = smallerSize * 2;
+                
+
+                //User inoput display 
+                cout << "Loaded " << fullSize << " values." << endl;
+                cout << "Choose the dataset to test:" << endl;
+                cout << "1: Smaller dataset (" << smallerSize
+                << " values)" << endl;
+                cout << "2: Larger dataset (" << largerSize
+                << " values)" << endl;
+                cout << "Enter choice: ";
+
+                int sizeChoice = 0;
+
+                //Check if user entered a valid number
+                if (!(cin >> sizeChoice)) {
+                    cerr << "ERROR: Please enter a number." << endl;
+                    return 1;
+                }
+                // El_If statements to get the size of the data set based on user input, if not invalid
+                if (sizeChoice == 1) {
+                    sz = smallerSize;
+                } else if (sizeChoice == 2) {
+                    sz = largerSize;
+                } else {
+                    cout << "Invalid choice. Select option 1 to load again."
+                        << endl;
+                    break;
+                }
+
+                //Sucess screen
+                cout << "Ready to sort the first " << sz
+                    << " values." << endl;
+
                 break;
+            }
 
             case 2: // Bubble sort
 
