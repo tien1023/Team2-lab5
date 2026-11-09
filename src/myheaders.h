@@ -23,5 +23,4 @@ void shellSort(long data[], int sz);
 
 //Vivianna Add
 void insertionsort(long data[], long n);
-static void moveDown(long data[], long root, long last);
 void heapsort(long data[], long n);
