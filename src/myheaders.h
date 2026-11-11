@@ -15,7 +15,7 @@ void	swap(long& x, long& y);
 
 //Gilbert Added =)
 void selectionSort(long data[], long size);
-void countingSort(long data[], long size);
+void radixSort(long data[], long size); //Recently Added replaced for counting sort
 
 //Tien Add
 void bubbleSort(long data[], int sz);
