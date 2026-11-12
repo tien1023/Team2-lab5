@@ -273,17 +273,17 @@ int main() {
                 // Measure  the sorting function.
                 begin_time = clock();
 
-                countingSort(wData, sz);
+                radixSort(wData, sz);
 
                 end_time = clock();
 
                 cpu_time_used = (end_time - begin_time) / CLOCKS_PER_SEC;
 
-                cout << "Counting Sort ran for "
+                cout << "Radix Sort ran for "
                     << cpu_time_used << " secs." << endl;
 
-                // Menu option 7 goes to Counting Sort
-                ofilename = "countingSort_out.txt";
+                // Menu option 7 goes to Radix Sort
+                ofilename = "radixSort_out.txt";
 
                 if (writefile(wData, sz, ofilename) < 0) {
                     cerr << "ERROR: Output file could not be opened." << endl;
