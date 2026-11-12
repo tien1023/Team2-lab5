@@ -157,7 +157,7 @@ int main() {
 
 					break;
 
-            case 4: // Insertion sort.
+            case 4: // Insertion sort - Vivianna
                 if (sz <= 0) {
                     cout << "Choose option 1 to load data first." << endl;
                 break;
@@ -191,7 +191,7 @@ int main() {
                 cout << "Output written to " << ofilename << endl;
                 break;
 
-            case 5: // Heap sort.
+            case 5: // Heap sort - Vivianna
                 if (sz <= 0) {
                     cout << "Choose option 1 to load data first." << endl;
                 break;
@@ -259,7 +259,7 @@ int main() {
     		    cout << "Output written to " << ofilename << endl;
     		    break;
 
-            case 7: // Counting sort - Gilbert =)
+            case 7: // Radix sort - Gilbert =)
                 if (sz <= 0) {
                     cout << "Choose option 1 to load data first." << endl;
                     break;
